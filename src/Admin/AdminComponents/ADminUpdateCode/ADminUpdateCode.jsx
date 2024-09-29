@@ -6,36 +6,40 @@ import AdminSubmitButton from "../AdminSubmitButton/AdminSubmitButton";
 import { useNavigate } from "react-router-dom";
 
 const AdminUpdateCode = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [code, setCode] = useState("");
   const navigate = useNavigate();
   const raw = {
     code: code,
   };
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
+    setIsLoading(true);
 
     const requestOptions = {
       method: "POST",
-      headers: myHeaders,
-      body: raw,
-      credentials: "include",
-      redirect: "follow",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(raw),
+      credentials: 'include',
     };
 
-    fetch("http://127.0.0.1:2024/get/email?email=fakhreeya.mb@gmail.com", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("Success:", result);
+    try {
+      const response = await fetch("http://127.0.0.1:2024/get/email?email=fakhreeya.mb@gmail.com", requestOptions);
+      const result = await response.json();
 
-        navigate("/statisticadd");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      if (response.ok) {
+        setTimeout(() => {
+          navigate("/statisticadd");
+        }, 1000);
+      }
+
+      console.log("Success:", result);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const { t } = useTranslation();
@@ -63,6 +67,7 @@ const AdminUpdateCode = () => {
             </label>
             <div className="flex items-center justify-center">
               <AdminSubmitButton submitData={raw} url="http://127.0.0.1:2024/get/email?email=nurbackend@gmail.com" />
+              {isLoading && <p>Loading...</p>}
             </div>
           </form>
         </div>

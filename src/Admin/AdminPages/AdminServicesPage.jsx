@@ -15,13 +15,13 @@ const AdminServicesPage = () => {
 
     const lng = localStorage.getItem("i18nextLng");
 
-    const [activeButton, setActiveButton] = useState(() => {
-        return localStorage.getItem("activeButton") || "adding";
+    const [activeButtonServicing, setActiveButtonServicing] = useState(() => {
+        return localStorage.getItem("activeButtonServicing") || "addingService";
     });
     useEffect(() => {
 
-        localStorage.setItem("activeButton", activeButton);
-    }, [activeButton]);
+        localStorage.setItem("activeButtonServicing", activeButtonServicing);
+    }, [activeButtonServicing]);
     const { data, loading, error, setData } = useFetch("http://127.0.0.1:2024/get/services");
 
 
@@ -63,21 +63,21 @@ const AdminServicesPage = () => {
                     <div className="flex items-center justify-start py-[40px]">
                         <AdminStatisticsButton
                             className="border-r-0 rounded-r-[0px]"
-                            active={activeButton === 'adding'}
-                            onClick={() => setActiveButton('adding')}
+                            active={activeButtonServicing === 'addingService'}
+                            onClick={() => setActiveButtonServicing('addingService')}
                         >
                             {"Добавить услугу"}
                         </AdminStatisticsButton>
                         <AdminStatisticsButton
                             className="border-l-0 rounded-l-[0px]"
-                            active={activeButton === 'statistics'}
-                            onClick={() => setActiveButton('statistics')}
+                            active={activeButtonServicing === 'statistics'}
+                            onClick={() => setActiveButtonServicing('statistics')}
                         >
                             {"Услуги"}
                         </AdminStatisticsButton>
                     </div>
 
-                    {activeButton === 'adding' ? (
+                    {activeButtonServicing === 'addingService' ? (
                         <div>
                             <AdminSeriviceAdding />
                         </div>

@@ -21,15 +21,15 @@ const AdminProjects = () => {
     const lng = localStorage.getItem("i18nextLng");
 
 
-    const [activeButton, setActiveButton] = useState(() => {
-        return localStorage.getItem("activeButton") || "addingProjects";
+    const [activeButtonProject, setActiveButtonProject] = useState(() => {
+        return localStorage.getItem("activeButtonProject") || "addingProjects";
     });
 
 
 
     useEffect(() => {
-        localStorage.setItem("activeButton", activeButton);
-    }, [activeButton]);
+        localStorage.setItem("activeButtonProject", activeButtonProject);
+    }, [activeButtonProject]);
 
 
 
@@ -105,22 +105,22 @@ const AdminProjects = () => {
             <div className="flex items-center justify-start py-[40px] ">
                 <AdminStatisticsButton
                     className="border-r-0 rounded-r-[0px]"
-                    active={activeButton === 'addingProjects'}
-                    onClick={() => setActiveButton('addingProjects')}
+                    active={activeButtonProject === 'addingProjects'}
+                    onClick={() => setActiveButtonProject('addingProjects')}
                 >
                     {t("Добавить проект")}
                 </AdminStatisticsButton>
                 <AdminStatisticsButton
                     className="border-l-0 rounded-l-[0px]"
-                    active={activeButton === 'projects'}
-                    onClick={() => setActiveButton('projects')}
+                    active={activeButtonProject === 'projects'}
+                    onClick={() => setActiveButtonProject('projects')}
                 >
                     {t("Проекты")}
                 </AdminStatisticsButton>
             </div>
 
             <div>
-                {activeButton === 'addingProjects' ? (
+                {activeButtonProject === 'addingProjects' ? (
                     <div>
                         <form onSubmit={handleSubmit} className="bg-[#D7E8E5] py-[15px] pr-[36px] pl-[20px] flex items-start justify-between gap-[52px] ">
                             <div >
@@ -173,13 +173,13 @@ const AdminProjects = () => {
                     <div className="flex items-start  gap-5 flex-col mt-[50px]">
                         {data.map((item) => (
                             <div key={item.Id} className="flex items-center justify-between h-[83px] w-[1272px] rounded-[10px] py-[15px] px-[20px] border-[3px] border-[#249D8C] font-normal">
-                                <div className="flex items-center flex-col justify-center font-normal text-[26px] text-[#000000]">
-                                    <p className="text-[26px]">
+                                <div className=" font-normal text-[26px] text-[#000000]">
+                                    <p className="text-[26px] font-semibold">
                                         {lng === "ru" ? item.RussianProject.project_name : item.TajikProject.project_name}
                                     </p>
-                                    <span className="text-[22px]">
+                                    <p className="text-[22px]">
                                         {lng === "ru" ? item.RussianProject.author : item.TajikProject.author}
-                                    </span>
+                                    </p>
                                 </div>
                                 <AdminButtonDelete onClick={() => handleDeleteStatistics(item.Id)} />
                             </div>

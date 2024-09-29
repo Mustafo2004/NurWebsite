@@ -29,13 +29,13 @@ const AdminNewsPage = () => {
     const { t } = useTranslation();
     const lng = localStorage.getItem("i18nextLng");
 
-    const [activeButton, setActiveButton] = useState(() => {
-        return localStorage.getItem("activeButton") || "addNews";
+    const [activeButtonNews, setActiveButtonNews] = useState(() => {
+        return localStorage.getItem("activeButtonNews") || "addNews";
     });
 
     useEffect(() => {
-        localStorage.setItem("activeButton", activeButton);
-    }, [activeButton]);
+        localStorage.setItem("activeButtonNews", activeButtonNews);
+    }, [activeButtonNews]);
 
     const raw = {
         "Date": dataTime,
@@ -127,21 +127,21 @@ const AdminNewsPage = () => {
                     <div className="flex items-center justify-start py-[40px] ">
                         <AdminStatisticsButton
                             className="border-r-0 rounded-r-[0px]"
-                            active={activeButton === 'addNews'}
-                            onClick={() => setActiveButton('addNews')}
+                            active={activeButtonNews === 'addNews'}
+                            onClick={() => setActiveButtonNews('addNews')}
                         >
                             {t("Добавить новость")}
                         </AdminStatisticsButton>
                         <AdminStatisticsButton
                             className="border-l-0 rounded-l-[0px]"
-                            active={activeButton === 'news'}
-                            onClick={() => setActiveButton('news')}
+                            active={activeButtonNews === 'news'}
+                            onClick={() => setActiveButtonNews('news')}
                         >
                             {t("Новости")}
                         </AdminStatisticsButton>
                     </div>
                     <div>
-                        {activeButton === 'addNews' ? (
+                        {activeButtonNews === 'addNews' ? (
                             <div>
                                 <form onSubmit={handleSubmit} className=" ">
                                     <div>
@@ -182,6 +182,9 @@ const AdminNewsPage = () => {
                                                             required={true}
                                                             onChange={(e) => setProjectDescriptionTj(e.target.value)}
                                                         />
+                                                        {/* <textarea name="adf" id="" placeholder="Описание">
+                                                            df
+                                                        </textarea> */}
                                                     </div>
                                                 )}
                                             </div>
@@ -280,12 +283,13 @@ const AdminNewsPage = () => {
                                         <div key={item.Id} className="flex flex-col gap-5">
                                             <div className="flex items-center justify-between h-[83px] w-[1272px] rounded-[10px] py-[15px] px-[20px] border-[3px] 
                                             border-[#249D8C]">
-                                                <div className="flex items-center">
-                                                    <Link to={`/news/${item.Id}`}>
-                                                        <li className="flex items-center justify-start w-full mb-[40px]">
-                                                            <h3>{lng === 'ru' ? item.RussianNews.title : item.TajikNews.title}</h3>
-                                                            <h3>{lng === 'ru' ? item.RussianNews.short_info : item.TajikNews.short_info}</h3>
-                                                        </li>
+                                                <div className="flex items-center w-full">
+                                                    <Link to={`/news/${item.Id}`} className="w-full">
+                                                        <div className="flex items-center justify-start gap-[15px] font-normal text-[26px] text-[#999999]">
+                                                            <p>{item.date}</p>
+                                                            <span className="w-[29px] border-[2px] rotate-90 border-[#249D8C]"></span>
+                                                            <p>{lng === "ru" ? item.TajikNews.title : item.RussianNews.title}</p>
+                                                        </div>
                                                     </Link>
                                                 </div>
                                                 <AdminButtonDelete

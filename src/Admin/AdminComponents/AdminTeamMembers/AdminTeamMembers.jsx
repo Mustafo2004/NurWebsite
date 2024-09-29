@@ -12,7 +12,7 @@ const AdminTeamMembers = () => {
     console.log(t);
 
 
-    const item = data?.find(each => String(each.id) === String(teamId));
+    const item = data?.find(each => String(each.Id) === String(teamId));
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
@@ -40,27 +40,26 @@ const AdminTeamMembers = () => {
                     <div className="flex items-start justify-start gap-[40px]">
                         <div className="w-[658px] h-[722px] border-[#249D8C]  border">
                             <img src={item.Photo} alt="dfsa" className=" h-full" />
-
                         </div>
                         <div className="font-semibold mt-[40px]">
                             <div>
-                                <p className="text-[#303C3A] font-semibold text-[40px]">
-                                    {i18n.language === "ru" ? item.RussianMembers?.name : item.TajikMembers?.name}
+                                <p className="text-[#303C3A] font-semibold text-[40px] max-w-[718px]">
+                                    {i18n.language === "ru" ? item.russianmembers?.name_surname : item.tajikmembers?.name_surname}
                                 </p>
-                                <p className="text-[#26776C] text-[28px]">
-                                    {i18n.language === "ru" ? item.RussianMembers?.specialization : item.TajikMembers?.specialization}
+                                <p className="text-[#26776C] text-[28px] max-w-[718px]">
+                                    {i18n.language === "ru" ? item.russianmembers?.specialization : item.tajikmembers?.specialization}
                                 </p>
                             </div>
                             <div className="mt-[30px] flex-col flex gap-[40px]">
 
                                 <div>
                                     <h1 className="text-[#26776C] text-[26px]">{t("Admin.Member.education")}</h1>
-                                    <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.RussianMembers?.specialization : item.TajikMembers?.specialization}</p>
-                                    <p className="font-normal text-[20px] text-[#303C3A]"><span className="text-[#26776C]">Специализация:</span>{i18n.language === "ru" ? item.RussianMembers?.specialization : item.TajikMembers?.specialization}</p>
+                                    <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.russianmembers?.specialization : item.tajikmembers?.specialization}</p>
+                                    <p className="font-normal text-[20px] text-[#303C3A]"><span className="text-[#26776C]">Специализация:</span>{i18n.language === "ru" ? item.russianmembers?.specialization : item.tajikmembers?.specialization}</p>
                                 </div>
                                 <div>
                                     <h1 className="text-[#26776C] text-[26px]">{t("Admin.Member.expirence")}</h1>
-                                    <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.RussianMembers?.specialization : item.TajikMembers?.specialization}</p>
+                                    <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.russianmembers?.specialization : item.tajikmembers?.specialization}</p>
                                 </div>
                                 <div>
 
@@ -72,9 +71,9 @@ const AdminTeamMembers = () => {
                                             <p>{t("Admin.Member.worktime")}</p>
                                         </div>
                                         <div>
-                                            <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.RussianMembers?.specialization : item.TajikMembers?.specialization}</p>
-                                            <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.RussianMembers?.specialization : item.TajikMembers?.specialization}</p>
-                                            <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.RussianMembers?.specialization : item.TajikMembers?.specialization}</p>
+                                            <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.russianmembers?.specialization : item.tajikmembers?.specialization}</p>
+                                            <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.russianmembers?.specialization : item.tajikmembers?.specialization}</p>
+                                            <p className="font-normal text-[20px] text-[#303C3A]">{i18n.language === "ru" ? item.russianmembers?.specialization : item.tajikmembers?.specialization}</p>
                                         </div>
                                     </div>
                                 </div>

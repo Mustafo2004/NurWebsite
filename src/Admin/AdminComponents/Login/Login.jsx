@@ -18,7 +18,7 @@ const Login = () => {
         Password: password,
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setIsLoading(true);
 
@@ -29,23 +29,24 @@ const Login = () => {
             credentials: 'include',
         };
 
-        fetch("http://127.0.0.1:2024/login", requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                console.log("Success:", result);
+        try {
+            const response = await fetch("http://127.0.0.1:2024/login", requestOptions);
+            const result = await response.json();
+
+            if (response.ok) {
                 setTimeout(() => {
                     navigate("/statisticadd");
                 }, 1000);
+            }
 
-
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+            console.log("Success:", result);
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            setIsLoading(false);
+        }
     };
+
 
     return (
         <div className="border-[#249D8C] border-[4px] h-[870px] rounded-[10px] flex items-center justify-between flex-col pb-[40px]">

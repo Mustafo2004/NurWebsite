@@ -7,8 +7,8 @@ import useFetch from "../../Hooks/Fetching";
 import AdminButtonDelete from "../AdminComponents/AdminButtonDelete/AdminButtonDelete";
 
 const AdminPartners = () => {
-    const [activeButton, setActiveButton] = useState(() => {
-        return localStorage.getItem("activeButton") || "addparnters";
+    const [activeButtonPartner, setActiveButtonPartner] = useState(() => {
+        return localStorage.getItem("activeButtonPartner") || "addparnters";
     });
     const [photoPath, setPhotoPath] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -19,13 +19,13 @@ const AdminPartners = () => {
 
     useEffect(() => {
 
-        localStorage.setItem("activeButton", activeButton);
-    }, [activeButton]);
+        localStorage.setItem("activeButtonPartner", activeButtonPartner || "addparnters");
+    }, [activeButtonPartner]);
 
     useEffect(() => {
-        const storedButton = localStorage.getItem("activeButton");
+        const storedButton = localStorage.getItem("activeButtonPartner");
         if (storedButton) {
-            setActiveButton(storedButton);
+            setActiveButtonPartner(storedButton);
         }
     }, []);
 
@@ -124,20 +124,20 @@ const AdminPartners = () => {
                     <div className="flex items-center justify-start">
                         <AdminStatisticsButton
                             className="border-r-0 rounded-r-none"
-                            active={activeButton === "addparnters"}
-                            onClick={() => setActiveButton("addparnters")}
+                            active={activeButtonPartner === "addparnters"}
+                            onClick={() => setActiveButtonPartner("addparnters")}
                         >
                             Добавить партнера
                         </AdminStatisticsButton>
                         <AdminStatisticsButton
                             className="border-l-0 rounded-l-none"
-                            active={activeButton === "partners"}
-                            onClick={() => setActiveButton("partners")}
+                            active={activeButtonPartner === "partners"}
+                            onClick={() => setActiveButtonPartner("partners")}
                         >
                             Партнеры
                         </AdminStatisticsButton>
                     </div>
-                    {activeButton === "addparnters" ? (
+                    {activeButtonPartner === "addparnters" ? (
                         <div className="my-[56px] mb-[400px]">
                             <form onSubmit={handleSubmit}>
 

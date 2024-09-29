@@ -69,7 +69,7 @@ const Pages = () => {
                     element: <AdminElement><AdminTeamPage /></AdminElement>
                 },
                 {
-                    path: "/members/:teamId",
+                    path: "/team/:teamId",
                     element: <AdminElement><AdminTeamMembers /></AdminElement>
                 },
                 {
@@ -102,7 +102,7 @@ const Pages = () => {
 // eslint-disable-next-line react/prop-types
 function AdminElement({ children }) {
     if (CURRENT_USER_TYPE === USER_TYPES.ADMIN_USER) {
-        return <div className="px-[50px] py-[40px] bg-[#F4FCF8] h-[1080px] ">{children}</div>;
+        return <div className="px-[50px] py-[40px] bg-[#F4FCF8] min-h-[1080px] ">{children}</div>;
     } else {
         return <div>You do not have access to this page!</div>;
     }

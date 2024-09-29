@@ -3,8 +3,8 @@
 const AdminFieldBorder = ({ children, className }) => {
     return (
         <div >
-
-            <div className={`min-h-[870px] pb-[20px] w-[1400px]  border-[4px] pl-[40px]    rounded-[4px] overflow-hidden border-[#249D8C] ${className}`}>
+            {/* w-[1400px]   */}
+            <div className={`min-h-[870px] pb-[20px]   border-[4px] pl-[40px]    rounded-[4px] overflow-hidden border-[#249D8C] ${className}`}>
                 {children}
             </div>
         </div>

@@ -87,20 +87,20 @@ const AdminSerive = () => {
                             </div>
                             <div>
                                 <h1 className="text-[#26776C] mb-[15px] font-semibold text-[28px]">{t("Admin.Services.specialists")}</h1>
-                                {/* <ul className="list-disc pl-[24px] text-[#303C3A] font-normal text-[20px]">
+                                <ul className="list-disc pl-[24px] text-[#303C3A] font-normal text-[20px]">
                                     {i18n.language === "ru"
-                                        ? item.RussianServices.Specialists.map((specialist) => (
+                                        ? item.RussianServices.specialists.map((specialist) => (
                                             <li key={specialist.id} className="font-normal text-[20px] text-[#303C3A]">
                                                 {specialist}
                                             </li>
                                         ))
-                                        : item.TajikServices.Specialists.map((specialist) => (
+                                        : item.TajikServices.specialists.map((specialist) => (
                                             <li key={specialist.id} className="font-normal text-[20px] text-[#303C3A]">
                                                 {specialist}
                                             </li>
                                         ))
                                     }
-                                </ul> */}
+                                </ul>
 
                             </div>
                             <div>

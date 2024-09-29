@@ -14,13 +14,13 @@ const AdminStatisticsFields = () => {
     console.log(t);
 
 
-    const [activeButton, setActiveButton] = useState(() => {
-        return localStorage.getItem("activeButton") || "adding";
+    const [activeButtonStatistics, setActiveButtonStatistics] = useState(() => {
+        return localStorage.getItem("activeButtonStatistics") || "adding";
     });
 
     useEffect(() => {
-        localStorage.setItem("activeButton", activeButton);
-    }, [activeButton]);
+        localStorage.setItem("activeButtonStatistics", activeButtonStatistics || "adding");
+    }, [activeButtonStatistics]);
 
     const { data, loading, error, setData } = useFetch("http://127.0.0.1:2024/get/statistics");
 
@@ -54,6 +54,8 @@ const AdminStatisticsFields = () => {
                 setData(updatedData);
             })
             .catch((error) => console.error(error));
+
+
     };
 
     if (loading) return <p>Loading...</p>;
@@ -100,22 +102,22 @@ const AdminStatisticsFields = () => {
                 <div className="flex-[3]">
                     <div className="flex items-center justify-start py-[40px]">
                         <AdminStatisticsButton
-                            className="border-r-0 rounded-r-[0px]"
-                            active={activeButton === 'adding'}
-                            onClick={() => setActiveButton('adding')}
+                            className={`border-r-0 rounded-r-[0px] `}
+                            active={activeButtonStatistics === 'adding'}
+                            onClick={() => setActiveButtonStatistics('adding')}
                         >
                             {"Добавить статистику"}
                         </AdminStatisticsButton>
                         <AdminStatisticsButton
                             className="border-l-0 rounded-l-[0px]"
-                            active={activeButton === 'statistics'}
-                            onClick={() => setActiveButton('statistics')}
+                            active={activeButtonStatistics === 'statistics'}
+                            onClick={() => setActiveButtonStatistics('statistics')}
                         >
                             {"Статистика"}
                         </AdminStatisticsButton>
                     </div>
 
-                    {activeButton === 'adding' ? (
+                    {activeButtonStatistics === 'adding' ? (
                         <div>
                             <form onSubmit={handleSubmit}>
                                 <div className="flex items-center justify-between gap-5">
@@ -135,7 +137,7 @@ const AdminStatisticsFields = () => {
                                                     type="text"
                                                     value={descriptionTj}
                                                     placeholder="Описание"
-                                                    className="border-[3px] w-[686px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                    className="border-[3px] min-w-[686px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
                                                     required={true}
                                                     onChange={(e) => setDescriptionTj(e.target.value)}
                                                 />
@@ -166,9 +168,9 @@ const AdminStatisticsFields = () => {
                             {data.map((item) => (
                                 <div key={item.Id} className="flex items-center justify-between h-[83px] w-[1272px] rounded-[10px] py-[15px] px-[20px] border-[3px] border-[#249D8C]">
                                     <div className="flex items-center justify-start gap-[15px] font-normal text-[26px] text-[#999999]">
-                                        <p>{lng === "ru" ? item.RussianNews.value : item.TajikNews.value}</p>
+                                        <p>{item.value}</p>
                                         <span className="w-[29px] border-[2px] rotate-90 border-[#249D8C]"></span>
-                                        {/* <p>{lng === "ru" ? item.RussianNews.description : item.TajikNews.description}</p> */}
+                                        <p>{lng === "ru" ? item.russianstatistics.description : item.tajikstatistics.description}</p>
                                     </div>
                                     <AdminButtonDelete onClick={() => handleDeleteStatistics(item.Id)} />
                                 </div>

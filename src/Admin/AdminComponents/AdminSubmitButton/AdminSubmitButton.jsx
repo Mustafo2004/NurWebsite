@@ -10,12 +10,6 @@ const AdminSubmitButton = ({ submitData, url }) => {
 
             const requestData = submitData
 
-
-            if (requestData.error) {
-                throw new Error(requestData.error);
-            }
-
-
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -26,18 +20,25 @@ const AdminSubmitButton = ({ submitData, url }) => {
             });
 
             if (response.ok) {
-                const result = await response.json();
+                console.log("if", response);
+                
+                const result = await response.text();
+                console.log("result", result);
+                
                 setModalState({ message: 'Отправка успешна!', class: styles.success, show: true });
                 console.log("Success:", result);
             } else {
-                const errorData = await response.json();
+                console.log("else", response);
+                const errorData = await response.text();
                 throw new Error(`Ошибка отправки: ${errorData.message || 'Unknown error'}`);
             }
         } catch (error) {
-            setModalState({ message: error.message, class: styles.error, show: true });
+            setModalState({ message: "error.message", class: styles.error, show: true });
             console.error("Error:", error);
         }
     };
+
+    // nurbackend@gmail.com
 
     const handleClickOutside = (e) => {
         if (e.target.classList.contains(styles.modal)) {
