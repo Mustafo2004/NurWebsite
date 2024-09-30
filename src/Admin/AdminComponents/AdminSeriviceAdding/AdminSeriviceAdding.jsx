@@ -76,7 +76,21 @@ const AdminServiceAdding = () => {
 
 
     // const [selectedMembers, setSelectedMembers] = useState([]);
+    const [selectedOption, setSelectedOption] = useState(null);
 
+    // const options = [
+    //     { value: 'chocolate', label: 'Chocolate' },
+    //     { value: 'strawberry', label: 'Strawberry' },
+    //     { value: 'vanilla', label: 'Vanilla' },
+    // ];
+    const optionsTj = data.map(item => ({
+        value: item.Id,
+        label: item.tajikmembers?.name_surname
+    }));
+    const optionsRu = data.map(item => ({
+        value: item.Id,
+        label: item.russianmembers?.name_surname
+    }));
 
 
 
@@ -90,7 +104,7 @@ const AdminServiceAdding = () => {
             "Title": titleRu,
             "Description": descriptionRu,
             "Specialists": [
-                "skjakxnnxj"
+                optionsRu
             ],
             "ServiceContents": [
                 "7878787878"
@@ -100,7 +114,7 @@ const AdminServiceAdding = () => {
             "Title": titleTj,
             "Description": descriptionTj,
             "Specialists": [
-
+                optionsTj
             ],
             "ServiceContents": [
                 "7878787"
@@ -133,21 +147,7 @@ const AdminServiceAdding = () => {
             });
     };
 
-    const [selectedOption, setSelectedOption] = useState(null);
 
-    // const options = [
-    //     { value: 'chocolate', label: 'Chocolate' },
-    //     { value: 'strawberry', label: 'Strawberry' },
-    //     { value: 'vanilla', label: 'Vanilla' },
-    // ];
-    const optionsTj = data.map(item => ({
-        value: item.Id,
-        label: item.tajikmembers?.name_surname
-    }));
-    const optionsRu = data.map(item => ({
-        value: item.Id,
-        label: item.russianmembers?.name_surname
-    }));
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
@@ -182,35 +182,55 @@ const AdminServiceAdding = () => {
 
 
                                         <Select
-                                            className="h-[69px] rounded-[10px] border-[3px] border-[#249D8C] py-[15px] px-[20px] "
                                             defaultValue={selectedOption}
                                             onChange={setSelectedOption}
-                                            options={optionsTj}
+                                            options={optionsRu}
                                             isMulti
+                                            styles={{
+                                                control: (baseStyles) => ({
+                                                    ...baseStyles,
+                                                    height: '69px',
+                                                    borderRadius: '10px',
+                                                    borderWidth: '3px',
+                                                    borderColor: '#249D8C',
+                                                    paddingTop: '15px',
+                                                    paddingBottom: '15px',
+                                                    paddingLeft: '20px',
+                                                    paddingRight: '20px',
+                                                }),
+                                                option: (baseStyles) => ({
+                                                    ...baseStyles,
+                                                }),
+                                            }}
                                         />
-                                        <div>
-                                            <div>
-                                                <h3 >Additional </h3>
-                                                <input
 
+                                        <div className="">
 
-                                                    type="text"
-                                                    onChange={(e) => setAdditionalRu(e.target.value)}
-                                                    value={additionalRu}
-                                                />
-                                            </div>
-                                            <img onClick={addRu} src={Plus} alt="" />
-                                        </div>
-                                        <ul >
-                                            {InfoRu.map((serviceRu, index) => (
-                                                <div key={serviceRu.Id}>
-                                                    <li key={index}>
-                                                        {serviceRu}
-                                                    </li>
-                                                    <img src={X} onClick={() => removeInfoRu(index)} alt="" />
+                                            <div className="flex px-[20px] h-[69px] rounded-[10px] border-[3px] border-[#249D8C]   items-center justify-between">
+                                                <div className="w-full">
+                                                    <h3 className="text-[#999999] text-[12px] font-normal">Что включает услуга</h3>
+                                                    <input
+                                                        className="w-full bg-transparent  border-none h-full focus:outline-none"
+                                                        type="text"
+                                                        onChange={(e) => setAdditionalRu(e.target.value)}
+                                                        value={additionalRu}
+                                                    />
                                                 </div>
-                                            ))}
-                                        </ul>
+                                                <div className="h-[53px] bg-white w-[106px] rounded-[5px] flex items-center justify-center">
+                                                    <img onClick={addRu} src={Plus} alt="" />
+                                                </div>
+                                            </div>
+                                            <ul className=" flex  justify-start items-center mt-[15px] gap-[20px]">
+                                                {InfoRu.map((serviceRu, index) => (
+                                                    <div key={serviceRu.Id} className="bg-[#E9FAF7] w-fit rounded-[5px] p-[5px] flex items-center justify-start gap-[5px]">
+                                                        <li key={index}>
+                                                            {serviceRu}
+                                                        </li>
+                                                        <img src={X} onClick={() => removeInfoRu(index)} alt="" />
+                                                    </div>
+                                                ))}
+                                            </ul>
+                                        </div>
 
                                         <AdminInput
                                             type="text"
@@ -309,12 +329,53 @@ const AdminServiceAdding = () => {
 
 
                                         <Select
-                                            className="h-[69px] rounded-[10px] border-[3px] border-[#249D8C] py-[15px] px-[20px] "
                                             defaultValue={selectedOption}
                                             onChange={setSelectedOption}
-                                            options={optionsRu}
+                                            options={optionsTj}
                                             isMulti
+                                            styles={{
+                                                control: (baseStyles) => ({
+                                                    ...baseStyles,
+                                                    height: '69px',
+                                                    borderRadius: '10px',
+                                                    borderWidth: '3px',
+                                                    borderColor: '#249D8C',
+                                                    paddingTop: '15px',
+                                                    paddingBottom: '15px',
+                                                    paddingLeft: '20px',
+                                                    paddingRight: '20px',
+                                                }),
+                                                option: (baseStyles) => ({
+                                                    ...baseStyles,
+                                                }),
+                                            }}
                                         />
+                                        <div className="">
+                                            <div className="flex px-[20px] h-[69px] rounded-[10px] border-[3px] border-[#249D8C]   items-center justify-between">
+                                                <div className="w-full">
+                                                    <h3 className="text-[#999999] text-[12px] font-normal">Что включает услуга</h3>
+                                                    <input
+                                                        className="w-full bg-transparent  border-none h-full focus:outline-none"
+                                                        type="text"
+                                                        onChange={(e) => setAdditionalRu(e.target.value)}
+                                                        value={additionalRu}
+                                                    />
+                                                </div>
+                                                <div className="h-[53px] bg-white w-[106px] rounded-[5px] flex items-center justify-center">
+                                                    <img onClick={addRu} src={Plus} alt="" />
+                                                </div>
+                                            </div>
+                                            <ul className=" flex  justify-start items-center mt-[15px] gap-[20px]">
+                                                {InfoRu.map((serviceRu, index) => (
+                                                    <div key={serviceRu.Id} className="bg-[#E9FAF7] w-fit rounded-[5px] p-[5px] flex items-center justify-start gap-[5px]">
+                                                        <li key={index}>
+                                                            {serviceRu}
+                                                        </li>
+                                                        <img src={X} onClick={() => removeInfoRu(index)} alt="" />
+                                                    </div>
+                                                ))}
+                                            </ul>
+                                        </div>
 
                                         <AdminInput
                                             type="text"

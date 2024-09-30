@@ -94,6 +94,7 @@ const AdminStatisticsFields = () => {
                 setIsLoading(false);
             });
 
+
     };
 
     return (
