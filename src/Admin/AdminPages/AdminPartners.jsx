@@ -165,7 +165,7 @@ const AdminPartners = () => {
                                     </label>
                                 </div>
                             </form>
-                            <div className="flex items-end justify-end mt-[400px]">
+                            <div className="flex items-end justify-end h-full">
                                 <AdminSubmitButton
                                     url="http://127.0.0.1:2024/add/partners"
                                     submitData={newPartner}

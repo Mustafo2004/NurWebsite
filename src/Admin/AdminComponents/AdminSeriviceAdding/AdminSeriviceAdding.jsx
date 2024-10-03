@@ -134,7 +134,7 @@ const AdminServiceAdding = () => {
             credentials: "include",
         };
 
-        fetch("http://127.0.0.1:2024/add/news", requestOptions)
+        fetch("http://127.0.0.1:2024/add/services", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 console.log("Success:", result);
@@ -220,7 +220,7 @@ const AdminServiceAdding = () => {
                                                     <img onClick={addRu} src={Plus} alt="" />
                                                 </div>
                                             </div>
-                                            <ul className=" flex  justify-start items-center mt-[15px] gap-[20px]">
+                                            <ul className=" flex  justify-start items-center flex-wrap mt-[15px] gap-[20px]">
                                                 {InfoRu.map((serviceRu, index) => (
                                                     <div key={serviceRu.Id} className="bg-[#E9FAF7] w-fit rounded-[5px] p-[5px] flex items-center justify-start gap-[5px]">
                                                         <li key={index}>
@@ -244,12 +244,10 @@ const AdminServiceAdding = () => {
                                     <AdminLanguageSelector onLanguageChange={handleLanguage} />
                                 </div>
                                 <div>
-
-
                                     <div className="flex mt-5 flex-col gap-5 pl-[20px]">
 
                                         <AdminInput
-                                            type="text"
+                                            type="date"
                                             placeholder="Даты"
                                             className="w-[1024px]"
                                             required={true}
@@ -392,7 +390,7 @@ const AdminServiceAdding = () => {
                                     <div className="flex mt-5 flex-col gap-5 pl-[20px]">
 
                                         <AdminInput
-                                            type="text"
+                                            type="date"
                                             placeholder="Даты"
                                             className="w-[1024px]"
                                             required={true}
@@ -451,8 +449,8 @@ const AdminServiceAdding = () => {
 
                 </div>
             </div>
-            <div className="items-end flex justify-end mr-[40px] my-[400px]">
-                <AdminSubmitButton submitData={handleSubmit} url="http://127.0.0.1:2024/add/statistics" />
+            <div className="items-end flex justify-end mr-[40px] ">
+                <AdminSubmitButton submitData={handleSubmit} url="http://127.0.0.1:2024/add/services" />
                 {isLoading && <p>Loading...</p>}
             </div>
         </div >

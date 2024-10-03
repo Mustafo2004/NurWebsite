@@ -5,6 +5,7 @@ const App = () => {
   return (
     <div>
       <Pages />
+      {/* <textarea name="" id="" placeholder="fdsfds" className="p-[20px] overflow-hidden"></textarea> */}
     </div>
   )
 }

@@ -14,7 +14,7 @@ const AdminProjects = () => {
     const [projectDescription, setProjectDescription] = useState("");
     const [projectDescriptionRu, setProjectDescriptionRu] = useState("");
     const [isTajikLanguage, setIsTajikLanguage] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const { data, loading, error, setData } = useFetch("http://127.0.0.1:2024/get/project");
     const { t } = useTranslation();
@@ -70,29 +70,29 @@ const AdminProjects = () => {
             })
             .catch((error) => console.error(error));
     };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setIsLoading(true);
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     setIsLoading(true);
 
-        const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestData),
-            credentials: "include",
-        };
+    //     const requestOptions = {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(requestData),
+    //         credentials: "include",
+    //     };
 
-        fetch("http://127.0.0.1:2024/add/project", requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                console.log("Success:", result);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    };
+    //     fetch("http://127.0.0.1:2024/add/project", requestOptions)
+    //         .then((response) => response.json())
+    //         .then((result) => {
+    //             console.log("Success:", result);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false);
+    //         });
+    // };
     const handleLanguage = (e) => {
         setIsTajikLanguage(e);
     };
@@ -122,7 +122,7 @@ const AdminProjects = () => {
             <div>
                 {activeButtonProject === 'addingProjects' ? (
                     <div>
-                        <form onSubmit={handleSubmit} className="bg-[#D7E8E5] py-[15px] pr-[36px] pl-[20px] flex items-start justify-between gap-[52px] ">
+                        <form className="bg-[#D7E8E5] py-[15px] pr-[36px] pl-[20px] flex items-start justify-between gap-[52px] ">
                             <div >
                                 {!isTajikLanguage ? (
                                     <div className="flex flex-col gap-5  ">
@@ -166,7 +166,7 @@ const AdminProjects = () => {
                         </form>
                         <div className="flex justify-end my-[350px] mr-[40px] ">
                             <AdminSubmitButton submitData={requestData} url="http://127.0.0.1:2024/add/project" />
-                            {isLoading && <p>Loading...</p>}
+                            {/* {isLoading && <p>Loading...</p>} */}
                         </div>
                     </div>
                 ) : (

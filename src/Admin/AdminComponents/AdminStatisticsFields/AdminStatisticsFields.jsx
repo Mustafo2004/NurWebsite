@@ -27,7 +27,7 @@ const AdminStatisticsFields = () => {
     const [descriptionTj, setDescriptionTj] = useState("");
     const [descriptionRu, setDescriptionRu] = useState("");
     const [value, setValue] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     const [isTajikLanguage, setIsTajikLanguage] = useState(false);
 
     const handleLanguage = (e) => {
@@ -71,35 +71,35 @@ const AdminStatisticsFields = () => {
         },
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setIsLoading(true);
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     setIsLoading(true);
 
-        const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestData),
-            credentials: "include",
-        };
+    //     const requestOptions = {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(requestData),
+    //         credentials: "include",
+    //     };
 
-        fetch("http://127.0.0.1:2024/add/statistics", requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                console.log("Success:", result);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+    //     fetch("http://127.0.0.1:2024/add/statistics", requestOptions)
+    //         .then((response) => response.json())
+    //         .then((result) => {
+    //             console.log("Success:", result);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false);
+    //         });
 
 
-    };
+    // };
 
     return (
-        <AdminFieldBorder className="flex items-start justify-between flex-col">
-            <div className="pr-[40px]">
+        <AdminFieldBorder className="flex items-end justify-between flex-col">
+            <div className="pr-[40px] flex items-start justify-start">
                 <div className="flex-[3]">
                     <div className="flex items-center justify-start py-[40px]">
                         <AdminStatisticsButton
@@ -120,7 +120,7 @@ const AdminStatisticsFields = () => {
 
                     {activeButtonStatistics === 'adding' ? (
                         <div>
-                            <form onSubmit={handleSubmit}>
+                            <form>
                                 <div className="flex items-center justify-between gap-5">
                                     <div>
                                         <input
@@ -159,10 +159,7 @@ const AdminStatisticsFields = () => {
                                     </div>
                                 </div>
                             </form>
-                            <div className="items-end flex justify-end mr-[40px] my-[400px]">
-                                <AdminSubmitButton submitData={requestData} url="http://127.0.0.1:2024/add/statistics" />
-                                {isLoading && <p>Loading...</p>}
-                            </div>
+
                         </div>
                     ) : (
                         <div className="flex items-stat gap-5 flex-col mt-[50px]">
@@ -179,6 +176,10 @@ const AdminStatisticsFields = () => {
                         </div>
                     )}
                 </div>
+            </div>
+            <div className="items-end flex justify-end mr-[40px]  ">
+                <AdminSubmitButton submitData={requestData} url="http://127.0.0.1:2024/add/statistics" />
+                {/* {isLoading && <p>Loading...</p>} */}
             </div>
         </AdminFieldBorder>
     );

@@ -14,7 +14,8 @@ const UpdatePassword = () => {
     const raw = {
         "email": email,
     };
-    const handleSubmit = (event) => {
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setIsLoading(true);
 
@@ -22,25 +23,23 @@ const UpdatePassword = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(raw),
-            // credentials: 'include',
+            credentials: 'include',
         };
 
-        fetch(`http://127.0.0.1:2024/get/email?email=${encodeURIComponent(email)}`, requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                console.log("Success:", result);
-                setTimeout(() => {
-                    navigate("/updatecode");
-                }, 1000);
+        try {
+            const response = await fetch(`http://127.0.0.1:2024/get/email?email=${encodeURIComponent(email)}`, requestOptions);
+            const result = await response.json();
 
+            if (response.ok) {
+                navigate("/updatecode");
+            }
 
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+            console.log("Success:", result);
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (

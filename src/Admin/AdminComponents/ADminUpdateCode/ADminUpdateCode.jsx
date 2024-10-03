@@ -25,16 +25,18 @@ const AdminUpdateCode = () => {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:2024/get/email?email=fakhreeya.mb@gmail.com", requestOptions);
+      const response = await fetch("http://127.0.0.1:2024/verify/code?email=nurbackend@gmail.com", requestOptions);
+      console.log("Response Status:", response.status);
       const result = await response.json();
+      console.log("Response Body:", result);
 
       if (response.ok) {
-        setTimeout(() => {
-          navigate("/statisticadd");
-        }, 1000);
+        // Navigate immediately without delay on success
+        navigate("/statisticadd");
+      } else {
+        console.log("Failed response: ", response.status);
       }
 
-      console.log("Success:", result);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -66,7 +68,7 @@ const AdminUpdateCode = () => {
               </span>
             </label>
             <div className="flex items-center justify-center">
-              <AdminSubmitButton submitData={raw} url="http://127.0.0.1:2024/get/email?email=nurbackend@gmail.com" />
+              <AdminSubmitButton submitData={raw} url="http://127.0.0.1:2024/verify/code?email=nurbackend@gmail.com" />
               {isLoading && <p>Loading...</p>}
             </div>
           </form>

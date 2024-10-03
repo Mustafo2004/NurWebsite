@@ -269,8 +269,9 @@ const AdminNewsPage = () => {
                                                 </label>
                                             </div>
                                         </div>
-                                        <div className="py-[40px] flex items-end justify-end mx-[20px]">
+                                        <div className="py-[40px] flex items-end flex-col justify-end mx-[20px]">
                                             <AdminSubmitButton submitData={raw} url="http://127.0.0.1:2024/add/news" />
+                                            {/* <button onClick={() => handleSubmit()}>Submit</button> */}
                                             {isLoading && <p>Loading...</p>}
                                         </div>
                                     </div>

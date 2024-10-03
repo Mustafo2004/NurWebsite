@@ -42,7 +42,7 @@ const AdminTeamPage = () => {
     const [specializationRu, setSpecialisationRu] = useState()
     const [educationRu, setEducationRu] = useState()
     const [expirenceRu, setExpirenceRu] = useState()
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const [phone, setPhone] = useState()
     const [email, setEmail] = useState()
@@ -136,34 +136,34 @@ const AdminTeamPage = () => {
     console.log("raw", raw);
     if (error) return <p>Error: {error.message}</p>;
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setIsLoading(true);
-        console.log("hello");
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     setIsLoading(true);
+    //     console.log("hello");
 
 
-        const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(raw),
-            credentials: "include",
-        };
+    //     const requestOptions = {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(raw),
+    //         credentials: "include",
+    //     };
 
 
-        console.log("requestOptions", requestOptions);
+    //     console.log("requestOptions", requestOptions);
 
-        fetch("http://127.0.0.1:2024/add/team/member", requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                console.log("Success:", result);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    };
+    //     fetch("http://127.0.0.1:2024/add/team/member", requestOptions)
+    //         .then((response) => response.json())
+    //         .then((result) => {
+    //             console.log("Success:", result);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false);
+    //         });
+    // };
     return (
         <div>
             <AdminFieldBorder>
@@ -183,255 +183,259 @@ const AdminTeamPage = () => {
                         Команда
                     </AdminStatisticsButton>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form>
                     <div>
 
                         {activeButtonTeam === 'addTeam' ? (
-                            <div>
-                                <div className="flex items-center justify-center gap-5 h-fit">
+                            <form>
+                                <div>
+                                    <div className="flex items-center justify-center gap-5 h-fit">
 
-                                    <div className="bg-[#D7E8E5] pl-[20px] pr-[40px] rounded-l-[10px] py-[15px]   flex items-center justify-start mt-[39px] gap-[69px]">
-                                        {!isTajikLanguage ? (
-                                            <div className="">
-                                                <form onSubmit={handleSubmit} className="flex items-center justify-center gap-5 flex-col">
-
-                                                    <AdminInput
-                                                        value={NameTj}
-                                                        type="text"
-                                                        placeholder="Имя TJ"
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setNameTj(e.target.value)}
-                                                    />
-                                                    <AdminInput
-                                                        value={proffesionTj}
-                                                        type="text"
-                                                        placeholder="Профессия"
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setProffesionTj(e.target.value)}
-                                                    />
-                                                    <AdminInput
-                                                        type="text"
-                                                        placeholder="Образование"
-                                                        value={educationTj}
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setEducationTj(e.target.value)}
-                                                    />
-                                                    <AdminInput
-                                                        type="text"
-                                                        value={specializationTj}
-                                                        placeholder="СпециализацияTJ"
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setSpecialisationTj(e.target.value)}
-                                                    />
-                                                    <AdminInput
-                                                        type="text"
-                                                        value={expirenceTj}
-                                                        placeholder="Опыт работы TJ"
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setExpirenceTj(e.target.value)}
-                                                    />
+                                        <div className="bg-[#D7E8E5] pl-[20px] pr-[40px] rounded-l-[10px] py-[15px]   flex items-center justify-start mt-[39px] gap-[69px]">
 
 
-                                                </form>
+                                            {!isTajikLanguage ? (
+                                                <div className="">
+                                                    <div className="flex items-center justify-center gap-5 flex-col">
 
-                                            </div>
-                                        ) : (
-                                            <div className="">
-                                                <form className="flex items-center justify-center gap-5 flex-col">
-                                                    <AdminInput
-                                                        value={NameRu}
-                                                        type="text"
-                                                        placeholder="Имя"
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setNameRU(e.target.value)}
-                                                    />
-                                                    <AdminInput
-                                                        value={proffesionRu}
-                                                        type="text"
-                                                        placeholder="Профессия"
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setProffesionRu(e.target.value)}
-                                                    />
-                                                    <AdminInput
-                                                        type="text"
-                                                        placeholder="Образование"
-                                                        value={educationRu}
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setEducationRu(e.target.value)}
-                                                    />
-                                                    <AdminInput
-                                                        type="text"
-                                                        value={specializationRu}
-                                                        placeholder="Специализация"
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setSpecialisationRu(e.target.value)}
-                                                    />
+                                                        <AdminInput
+                                                            value={NameTj}
+                                                            type="text"
+                                                            placeholder="ИФ"
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setNameTj(e.target.value)}
+                                                        />
+                                                        <AdminInput
+                                                            value={proffesionTj}
+                                                            type="text"
+                                                            placeholder="Профессия"
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setProffesionTj(e.target.value)}
+                                                        />
+                                                        <AdminInput
+                                                            type="text"
+                                                            placeholder="Образование"
+                                                            value={educationTj}
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setEducationTj(e.target.value)}
+                                                        />
+                                                        <AdminInput
+                                                            type="text"
+                                                            value={specializationTj}
+                                                            placeholder="СпециализацияTJ"
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setSpecialisationTj(e.target.value)}
+                                                        />
+                                                        <AdminInput
+                                                            type="text"
+                                                            value={expirenceTj}
+                                                            placeholder="Опыт работы TJ"
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setExpirenceTj(e.target.value)}
+                                                        />
 
-                                                    <AdminInput
-                                                        type="text"
-                                                        value={expirenceRu}
-                                                        placeholder="Опыт работы"
-                                                        className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                        onChange={(e) => setExpirenceRu(e.target.value)}
-                                                    />
-                                                </form>
 
-                                            </div>
-                                        )}
-                                        <AdminLanguageSelectoe onLanguageChange={handleLanguage} />
+                                                    </div>
 
+                                                </div>
+                                            ) : (
+                                                <div className="">
+                                                    <div className="flex items-center justify-center gap-5 flex-col">
+                                                        <AdminInput
+                                                            value={NameRu}
+                                                            type="text"
+                                                            placeholder="ИФ"
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setNameRU(e.target.value)}
+                                                        />
+                                                        <AdminInput
+                                                            value={proffesionRu}
+                                                            type="text"
+                                                            placeholder="Профессия"
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setProffesionRu(e.target.value)}
+                                                        />
+                                                        <AdminInput
+                                                            type="text"
+                                                            placeholder="Образование"
+                                                            value={educationRu}
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setEducationRu(e.target.value)}
+                                                        />
+                                                        <AdminInput
+                                                            type="text"
+                                                            value={specializationRu}
+                                                            placeholder="Специализация"
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setSpecialisationRu(e.target.value)}
+                                                        />
+
+                                                        <AdminInput
+                                                            type="text"
+                                                            value={expirenceRu}
+                                                            placeholder="Опыт работы"
+                                                            className="border-[3px] w-[1024px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                            required={true}
+                                                            onChange={(e) => setExpirenceRu(e.target.value)}
+                                                        />
+                                                    </div>
+
+                                                </div>
+                                            )}
+                                            <AdminLanguageSelectoe onLanguageChange={handleLanguage} />
+
+                                        </div>
                                     </div>
-                                </div>
-                                {/* ! */}
-                                <div className=" pl-[20px] flex flex-col gap-[13px]">
-                                    <div className=" flex flex-col  gap-5">
-                                        <div>{lng === "ru" ?
-                                            <div className="flex gap-[11px] mt-[20px]  items-center justify-start">
-                                                {/*  */}
-                                                <select
-                                                    value={statingDay}
-                                                    onChange={(e) => setStatingDay(e.target.value)}
-                                                    className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                    required={true}
-                                                >
-                                                    <option value="">Select a day</option>
-                                                    <option value="Monday">Monday</option>
-                                                    <option value="Tuesday">Tuesday</option>
-                                                    <option value="Wednesday">Wednesday</option>
-                                                    <option value="Thursday">Thursday</option>
-                                                    <option value="Friday">Friday</option>
-                                                    <option value="Saturday">Saturday</option>
-                                                </select>
-                                                <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
-                                                <select
-                                                    value={EndingDay}
-                                                    onChange={(e) => setEndingDay(e.target.value)}
-                                                    className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                    required={true}
-                                                >
-                                                    <option value="">Select a day</option>
-                                                    <option value="Monday">Monday</option>
-                                                    <option value="Tuesday">Tuesday</option>
-                                                    <option value="Wednesday">Wednesday</option>
-                                                    <option value="Thursday">Thursday</option>
-                                                    <option value="Friday">Friday</option>
-                                                    <option value="Saturday">Saturday</option>
-                                                </select>
+                                    {/* ! */}
+                                    <div className=" pl-[20px] flex flex-col gap-[13px]">
+                                        <div className=" flex flex-col  gap-5">
+                                            <div>{lng === "ru" ?
+                                                <div className="flex gap-[11px] mt-[20px]  items-center justify-start">
+                                                    {/*  */}
+                                                    <select
+                                                        value={statingDay}
+                                                        onChange={(e) => setStatingDay(e.target.value)}
+                                                        className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                        required={true}
+                                                    >
+                                                        <option value="">Select a day</option>
+                                                        <option value="Monday">Monday</option>
+                                                        <option value="Tuesday">Tuesday</option>
+                                                        <option value="Wednesday">Wednesday</option>
+                                                        <option value="Thursday">Thursday</option>
+                                                        <option value="Friday">Friday</option>
+                                                        <option value="Saturday">Saturday</option>
+                                                    </select>
+                                                    <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
+                                                    <select
+                                                        value={EndingDay}
+                                                        onChange={(e) => setEndingDay(e.target.value)}
+                                                        className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                        required={true}
+                                                    >
+                                                        <option value="">Select a day</option>
+                                                        <option value="Monday">Monday</option>
+                                                        <option value="Tuesday">Tuesday</option>
+                                                        <option value="Wednesday">Wednesday</option>
+                                                        <option value="Thursday">Thursday</option>
+                                                        <option value="Friday">Friday</option>
+                                                        <option value="Saturday">Saturday</option>
+                                                    </select>
 
-                                            </div>
-                                            :
-                                            <div className="flex gap-[11px] mt-[20px]  items-center justify-start">
-                                                {/*  */}
-                                                <select
-                                                    value={statingDay}
-                                                    onChange={(e) => setStatingDay(e.target.value)}
-                                                    className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                    required={true}
-                                                >
-                                                    <option value="">Select a day</option>
-                                                    <option value="Monday">Понедельник</option>
-                                                    <option value="Tuesday">Вторник</option>
-                                                    <option value="Wednesday">Среда</option>
-                                                    <option value="Thursday">Четверг</option>
-                                                    <option value="Friday">Пятница</option>
-                                                    <option value="Saturday">Суббота</option>
-                                                </select>
-                                                <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
-                                                <select
-                                                    value={EndingDay}
-                                                    onChange={(e) => setEndingDay(e.target.value)}
-                                                    className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                    required={true}
-                                                >
-                                                    <option value="">Select a day</option>
-                                                    <option value="Monday">Понедельник</option>
-                                                    <option value="Tuesday">Вторник</option>
-                                                    <option value="Wednesday">Среда</option>
-                                                    <option value="Thursday">Четверг</option>
-                                                    <option value="Friday">Пятница</option>
-                                                    <option value="Saturday">Суббота</option>
-                                                </select>
+                                                </div>
+                                                :
+                                                <div className="flex gap-[11px] mt-[20px]  items-center justify-start">
+                                                    {/*  */}
+                                                    <select
+                                                        value={statingDay}
+                                                        onChange={(e) => setStatingDay(e.target.value)}
+                                                        className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                        required={true}
+                                                    >
+                                                        <option value="">Select a day</option>
+                                                        <option value="Monday">Понедельник</option>
+                                                        <option value="Tuesday">Вторник</option>
+                                                        <option value="Wednesday">Среда</option>
+                                                        <option value="Thursday">Четверг</option>
+                                                        <option value="Friday">Пятница</option>
+                                                        <option value="Saturday">Суббота</option>
+                                                    </select>
+                                                    <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
+                                                    <select
+                                                        value={EndingDay}
+                                                        onChange={(e) => setEndingDay(e.target.value)}
+                                                        className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                        required={true}
+                                                    >
+                                                        <option value="">Select a day</option>
+                                                        <option value="Monday">Понедельник</option>
+                                                        <option value="Tuesday">Вторник</option>
+                                                        <option value="Wednesday">Среда</option>
+                                                        <option value="Thursday">Четверг</option>
+                                                        <option value="Friday">Пятница</option>
+                                                        <option value="Saturday">Суббота</option>
+                                                    </select>
 
-                                            </div>
-                                        }</div>
+                                                </div>
+                                            }</div>
 
-                                        <div className="flex gap-[11px]  items-center justify-start">
-                                            <AdminInput
-                                                type="time"
-                                                value={startingTime}
-                                                placeholder=""
-                                                className="border-[3px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                required={true}
-                                                onChange={(e) => setStartingTime(e.target.value)}
-                                            />
-                                            <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
-                                            <label htmlFor="">
-
+                                            <div className="flex gap-[11px]  items-center justify-start">
                                                 <AdminInput
                                                     type="time"
-                                                    value={endingTime}
+                                                    value={startingTime}
                                                     placeholder=""
                                                     className="border-[3px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
                                                     required={true}
-                                                    onChange={(e) => setEndingTime(e.target.value)}
+                                                    onChange={(e) => setStartingTime(e.target.value)}
                                                 />
-                                            </label>
+                                                <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
+                                                <label htmlFor="">
+
+                                                    <AdminInput
+                                                        type="time"
+                                                        value={endingTime}
+                                                        placeholder=""
+                                                        className="border-[3px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                        required={true}
+                                                        onChange={(e) => setEndingTime(e.target.value)}
+                                                    />
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="  flex flex-col gap-[13px]">
-                                        <AdminInput
-                                            className=" w-[1024px] bg-transparent"
-                                            type="tel"
-                                            placeholder={"+992 | Телефон"}
-                                            name="phone"
-                                            value={phone}
-                                            onChange={(e) => setPhone(e.target.value)}
-                                            required={true}
-                                        />
-                                        <AdminInput
-                                            className=" w-[1024px] bg-transparent"
-                                            type="email"
-                                            placeholder="Почта"
-                                            name="Почта"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            required={true}
-                                        />
-                                        <div className="w-[1024px] flex items-center justify-between border-[#249D8C] border-[3px] py-[9px] px-[20px] h-[71px] rounded-[10px]">
+                                        <div className="  flex flex-col gap-[13px]">
                                             <AdminInput
-                                                className="focus:outline-none w-[300px] border-none bg-transparent"
-                                                type="text"
-                                                placeholder="Фотография"
-                                                value={photoPath}
-                                                readOnly
+                                                className=" w-[1024px] bg-transparent"
+                                                type="tel"
+                                                placeholder={"+992 | Телефон"}
+                                                name="phone"
+                                                value={phone}
+                                                onChange={(e) => setPhone(e.target.value)}
+                                                required={true}
                                             />
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                onChange={(e) => handleFileChange(e, setPhotoPath, setBase64File)}
-                                                style={{ display: "none" }}
-                                                id="photo-upload-two"
+                                            <AdminInput
+                                                className=" w-[1024px] bg-transparent"
+                                                type="email"
+                                                placeholder="Почта"
+                                                name="Почта"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                required={true}
                                             />
-                                            <label
-                                                className="w-[250px] h-[53px] flex items-center justify-center text-[#249D8C] font-medium text-[26px] bg-white border-[#249D8C] border-[2px] cursor-pointer rounded-md"
-                                                htmlFor="photo-upload-two"
-                                            >
-                                                Выбрать фото
-                                            </label>
+                                            <div className="w-[1024px] flex items-center justify-between border-[#249D8C] border-[3px] py-[9px] px-[20px] h-[71px] rounded-[10px]">
+                                                <AdminInput
+                                                    className="focus:outline-none w-[300px] border-none bg-transparent"
+                                                    type="text"
+                                                    placeholder="Фотография"
+                                                    value={photoPath}
+                                                    readOnly
+                                                />
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={(e) => handleFileChange(e, setPhotoPath, setBase64File)}
+                                                    style={{ display: "none" }}
+                                                    id="photo-upload-two"
+                                                />
+                                                <label
+                                                    className="w-[250px] h-[53px] flex items-center justify-center text-[#249D8C] font-medium text-[26px] bg-white border-[#249D8C] border-[2px] cursor-pointer rounded-md"
+                                                    htmlFor="photo-upload-two"
+                                                >
+                                                    Выбрать фото
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         ) : (
                             <div className="flex items-stat gap-5 flex-col mt-[50px]">
                                 {data.map((item) => (
@@ -456,15 +460,15 @@ const AdminTeamPage = () => {
                             </div>
                         )}
 
-                        <div className="items-end flex justify-end mr-[40px] my-[400px]">
-                            <AdminSubmitButton submitData={raw} url="http://127.0.0.1:2024/add/team/member" />
-                            {isLoading && <p>Loading...</p>}
+                        <div className="items-end flex justify-end mr-[40px]">
+                            <AdminSubmitButton type="button" submitData={raw} url="http://127.0.0.1:2024/add/team/member"  />
+                            {/* {isLoading && <p>Loading...</p>} */}
                         </div>
                     </div>
 
-                </form>
-            </AdminFieldBorder>
-        </div>
+                </form >
+            </AdminFieldBorder >
+        </div >
     )
 }
 
