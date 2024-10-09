@@ -63,7 +63,9 @@ const AdminPartners = () => {
     // !
 
 
-
+    function refreshPage() {
+        window.location.reload(false);
+    }
     const newPartner = {
         Logo: base64File
     };
@@ -132,7 +134,10 @@ const AdminPartners = () => {
                         <AdminStatisticsButton
                             className="border-l-0 rounded-l-none"
                             active={activeButtonPartner === "partners"}
-                            onClick={() => setActiveButtonPartner("partners")}
+                            onClick={() => {
+                                setActiveButtonPartner("partners");
+                                refreshPage();
+                            }}
                         >
                             Партнеры
                         </AdminStatisticsButton>
@@ -165,7 +170,7 @@ const AdminPartners = () => {
                                     </label>
                                 </div>
                             </form>
-                            <div className="flex items-end justify-end h-full">
+                            <div className="flex items-end justify-end h-full relative top-[400px]">
                                 <AdminSubmitButton
                                     url="http://127.0.0.1:2024/add/partners"
                                     submitData={newPartner}
@@ -177,9 +182,9 @@ const AdminPartners = () => {
                         <div className="grid grid-cols-4 gap-5 mt-[50px] ">
                             {data.map((item) => (
                                 <div key={item.Id}>
-                                    <div className="rounded-[10px] overflow-hidden w-[316px] bg-[#D7E8E5] h-[393px] flex justify-between flex-col p-5 items-center">
+                                    <div className="rounded-[10px]  overflow-hidden w-[316px] gap-5 bg-[#D7E8E5]  flex justify-between flex-col p-5 items-center">
                                         <div className="flex justify-center items-center ">
-                                            <img src={`http://127.0.0.1:2024/read/file?Path=${item.Logo}`} alt="Partner logo" className="w-full h-full object-contain" />
+                                            <img src={`http://127.0.0.1:2024/read/file?Path=${item.Logo}`} alt="Partner logo" className="w-full h-[300px] object-contain" />
                                         </div>
                                         <AdminButtonDelete onClick={() => handleDeleteStatistics(item.Id)} />
                                     </div>
@@ -190,8 +195,8 @@ const AdminPartners = () => {
 
 
                 </div>
-            </AdminFieldBorder>
-        </div>
+            </AdminFieldBorder >
+        </div >
     );
 };
 

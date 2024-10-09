@@ -53,7 +53,9 @@ const AdminServicesPage = () => {
             })
             .catch((error) => console.error(error));
     };
-
+    function refreshPage() {
+        window.location.reload(false);
+    }
 
 
     return (
@@ -71,9 +73,15 @@ const AdminServicesPage = () => {
                         <AdminStatisticsButton
                             className="border-l-0 rounded-l-[0px]"
                             active={activeButtonServicing === 'statistics'}
-                            onClick={() => setActiveButtonServicing('statistics')}
+                            onClick={() => {
+
+                                setActiveButtonServicing('statistics')
+                                refreshPage()
+                            }
+                            }
                         >
                             {"Услуги"}
+
                         </AdminStatisticsButton>
                     </div>
 

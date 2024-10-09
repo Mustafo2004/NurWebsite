@@ -8,8 +8,33 @@ import useFetch from "../../Hooks/Fetching"
 import AdminInput from "../AdminComponents/AdminInput/AdminInput"
 import AdminLanguageSelectoe from "../AdminLanguageSelectoe/AdminLanguageSelectoe"
 import { Link } from "react-router-dom";
+import Select from 'react-select'
+
+const options = [
+    { value: 'Monday', label: 'Monday' },
+    { value: 'Tuesday', label: 'Tuesday' },
+    { value: 'Wednesday', label: 'Wednesday' },
+    { value: 'Thursday', label: 'Thursday' },
+    { value: 'Friday', label: 'Friday' },
+    { value: 'Saturday', label: 'Saturday' }
+]
+
+const optionsRu = [
+    { value: 'Monday', label: 'Понедельник' },
+    { value: 'Tuesday', label: 'Вторник' },
+    { value: 'Wednesday', label: 'Среда' },
+    { value: 'Thursday', label: 'Четверг' },
+    { value: 'Friday', label: 'Пятница' },
+    { value: 'Saturday', label: 'Суббота' }
+]
 
 
+// const MyComponent = () => (
+//     <Select options={options} />
+// )
+
+
+// 
 const AdminTeamPage = () => {
     const [activeButtonTeam, setActiveButtonTeam] = useState(() => {
         return localStorage.getItem("activeButtonTeam") || "addTeam";
@@ -33,15 +58,15 @@ const AdminTeamPage = () => {
 
     const [NameTj, setNameTj] = useState("");
     const [proffesionTj, setProffesionTj] = useState("");
-    const [educationTj, setEducationTj] = useState()
-    const [specializationTj, setSpecialisationTj] = useState()
-    const [expirenceTj, setExpirenceTj] = useState()
+    const [educationTj, setEducationTj] = useState("")
+    const [specializationTj, setSpecialisationTj] = useState("")
+    const [expirenceTj, setExpirenceTj] = useState("")
 
     const [NameRu, setNameRU] = useState("");
     const [proffesionRu, setProffesionRu] = useState("");
-    const [specializationRu, setSpecialisationRu] = useState()
-    const [educationRu, setEducationRu] = useState()
-    const [expirenceRu, setExpirenceRu] = useState()
+    const [specializationRu, setSpecialisationRu] = useState("")
+    const [educationRu, setEducationRu] = useState("")
+    const [expirenceRu, setExpirenceRu] = useState("")
     // const [isLoading, setIsLoading] = useState(false);
 
     const [phone, setPhone] = useState()
@@ -164,6 +189,9 @@ const AdminTeamPage = () => {
     //             setIsLoading(false);
     //         });
     // };
+    function refreshPage() {
+        window.location.reload(false);
+    }
     return (
         <div>
             <AdminFieldBorder>
@@ -178,7 +206,11 @@ const AdminTeamPage = () => {
                     <AdminStatisticsButton
                         className="border-l-0 rounded-l-none"
                         active={activeButtonTeam === "team"}
-                        onClick={() => setActiveButtonTeam("team")}
+                        onClick={() => {
+                            setActiveButtonTeam("team")
+                            refreshPage()
+                        }
+                        }
                     >
                         Команда
                     </AdminStatisticsButton>
@@ -191,7 +223,7 @@ const AdminTeamPage = () => {
                                 <div>
                                     <div className="flex items-center justify-center gap-5 h-fit">
 
-                                        <div className="bg-[#D7E8E5] pl-[20px] pr-[40px] rounded-l-[10px] py-[15px]   flex items-center justify-start mt-[39px] gap-[69px]">
+                                        <div className="bg-[#D7E8E5] pl-[20px] pr-[40px] rounded-l-[10px] py-[15px]   flex items-start justify-start mt-[39px] gap-[69px]">
 
 
                                             {!isTajikLanguage ? (
@@ -300,70 +332,99 @@ const AdminTeamPage = () => {
                                         <div className=" flex flex-col  gap-5">
                                             <div>{lng === "ru" ?
                                                 <div className="flex gap-[11px] mt-[20px]  items-center justify-start">
-                                                    {/*  */}
-                                                    <select
-                                                        value={statingDay}
-                                                        onChange={(e) => setStatingDay(e.target.value)}
-                                                        className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                    >
-                                                        <option value="">Select a day</option>
-                                                        <option value="Monday">Monday</option>
-                                                        <option value="Tuesday">Tuesday</option>
-                                                        <option value="Wednesday">Wednesday</option>
-                                                        <option value="Thursday">Thursday</option>
-                                                        <option value="Friday">Friday</option>
-                                                        <option value="Saturday">Saturday</option>
-                                                    </select>
-                                                    <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
-                                                    <select
-                                                        value={EndingDay}
-                                                        onChange={(e) => setEndingDay(e.target.value)}
-                                                        className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                    >
-                                                        <option value="">Select a day</option>
-                                                        <option value="Monday">Monday</option>
-                                                        <option value="Tuesday">Tuesday</option>
-                                                        <option value="Wednesday">Wednesday</option>
-                                                        <option value="Thursday">Thursday</option>
-                                                        <option value="Friday">Friday</option>
-                                                        <option value="Saturday">Saturday</option>
-                                                    </select>
+                                                    
+                                                    <div className="flex items-center justify-between gap-[15px]">
+
+                                                        <Select
+                                                            value={statingDay}
+                                                            onChange={(e) => setStatingDay(e)}
+                                                            options={options}
+                                                            styles={{
+                                                                control: (baseStyles) => ({
+                                                                    ...baseStyles,
+                                                                    height: '69px',
+                                                                    borderRadius: '10px',
+                                                                    borderWidth: '3px',
+                                                                    borderColor: '#249D8C',
+                                                                    paddingTop: '15px',
+                                                                    paddingBottom: '15px',
+                                                                    paddingLeft: '20px',
+                                                                    paddingRight: '20px',
+                                                                    width: "482px"
+                                                                }),
+                                                            }}
+                                                        />
+                                                        <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
+                                                        <Select
+                                                            value={EndingDay}
+                                                            onChange={(e) => setEndingDay(e)}
+                                                            options={options}
+                                                            styles={{
+                                                                control: (baseStyles) => ({
+                                                                    ...baseStyles,
+                                                                    height: '69px',
+                                                                    borderRadius: '10px',
+                                                                    borderWidth: '3px',
+                                                                    borderColor: '#249D8C',
+                                                                    paddingTop: '15px',
+                                                                    paddingBottom: '15px',
+                                                                    paddingLeft: '20px',
+                                                                    paddingRight: '20px',
+                                                                    width: "482px"
+                                                                }),
+                                                            }}
+                                                        />
+
+                                                    </div>
+
 
                                                 </div>
                                                 :
                                                 <div className="flex gap-[11px] mt-[20px]  items-center justify-start">
-                                                    {/*  */}
-                                                    <select
-                                                        value={statingDay}
-                                                        onChange={(e) => setStatingDay(e.target.value)}
-                                                        className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                    >
-                                                        <option value="">Select a day</option>
-                                                        <option value="Monday">Понедельник</option>
-                                                        <option value="Tuesday">Вторник</option>
-                                                        <option value="Wednesday">Среда</option>
-                                                        <option value="Thursday">Четверг</option>
-                                                        <option value="Friday">Пятница</option>
-                                                        <option value="Saturday">Суббота</option>
-                                                    </select>
-                                                    <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
-                                                    <select
-                                                        value={EndingDay}
-                                                        onChange={(e) => setEndingDay(e.target.value)}
-                                                        className="border-[3px] px-[20px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
-                                                        required={true}
-                                                    >
-                                                        <option value="">Select a day</option>
-                                                        <option value="Monday">Понедельник</option>
-                                                        <option value="Tuesday">Вторник</option>
-                                                        <option value="Wednesday">Среда</option>
-                                                        <option value="Thursday">Четверг</option>
-                                                        <option value="Friday">Пятница</option>
-                                                        <option value="Saturday">Суббота</option>
-                                                    </select>
+
+                                                    <div className="flex items-center justify-between gap-[15px]">
+
+                                                        <Select
+                                                            value={statingDay}
+                                                            onChange={(e) => setStatingDay(e)}
+                                                            options={optionsRu}
+                                                            styles={{
+                                                                control: (baseStyles) => ({
+                                                                    ...baseStyles,
+                                                                    height: '69px',
+                                                                    borderRadius: '10px',
+                                                                    borderWidth: '3px',
+                                                                    borderColor: '#249D8C',
+                                                                    paddingTop: '15px',
+                                                                    paddingBottom: '15px',
+                                                                    paddingLeft: '20px',
+                                                                    paddingRight: '20px',
+                                                                    width: "480px"
+                                                                }),
+                                                            }}
+                                                        />
+                                                        <span className="w-[33px] border-[3px] border-[#249D8C]"></span>
+                                                        <Select
+                                                            value={EndingDay}
+                                                            onChange={(e) => setEndingDay(e)}
+                                                            options={optionsRu}
+                                                            styles={{
+                                                                control: (baseStyles) => ({
+                                                                    ...baseStyles,
+                                                                    height: '69px',
+                                                                    borderRadius: '10px',
+                                                                    borderWidth: '3px',
+                                                                    borderColor: '#249D8C',
+                                                                    paddingTop: '15px',
+                                                                    paddingBottom: '15px',
+                                                                    paddingLeft: '20px',
+                                                                    paddingRight: '20px',
+                                                                    width: "480px"
+                                                                }),
+                                                            }}
+                                                        />
+
+                                                    </div>
 
                                                 </div>
                                             }</div>
@@ -373,7 +434,7 @@ const AdminTeamPage = () => {
                                                     type="time"
                                                     value={startingTime}
                                                     placeholder=""
-                                                    className="border-[3px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                    className="border-[3px] pb-[10px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
                                                     required={true}
                                                     onChange={(e) => setStartingTime(e.target.value)}
                                                 />
@@ -384,7 +445,7 @@ const AdminTeamPage = () => {
                                                         type="time"
                                                         value={endingTime}
                                                         placeholder=""
-                                                        className="border-[3px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
+                                                        className="border-[3px]  pb-[10px] w-[484px] bg-transparent h-[71px] rounded-[10px] border-[#249D8C]"
                                                         required={true}
                                                         onChange={(e) => setEndingTime(e.target.value)}
                                                     />
@@ -435,6 +496,11 @@ const AdminTeamPage = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="items-end flex justify-end mr-[40px]">
+                                    <AdminSubmitButton submitData={raw} url="http://127.0.0.1:2024/add/team/member" />
+                                    {/* <button>Submit</button> */}
+                                    {/* {isLoading && <p>Loading...</p>} */}
+                                </div>
                             </form>
                         ) : (
                             <div className="flex items-stat gap-5 flex-col mt-[50px]">
@@ -460,10 +526,7 @@ const AdminTeamPage = () => {
                             </div>
                         )}
 
-                        <div className="items-end flex justify-end mr-[40px]">
-                            <AdminSubmitButton type="button" submitData={raw} url="http://127.0.0.1:2024/add/team/member"  />
-                            {/* {isLoading && <p>Loading...</p>} */}
-                        </div>
+
                     </div>
 
                 </form >

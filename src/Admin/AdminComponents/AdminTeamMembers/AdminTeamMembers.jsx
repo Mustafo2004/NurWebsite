@@ -44,11 +44,11 @@ const AdminTeamMembers = () => {
     if (error) return <p>Error: {error.message}</p>;
 
     return (
-        <AdminFieldBorder className="pl-[0px] pb-0">
+        <AdminFieldBorder className="pl-[0px] pb-0 ">
 
             <div>
                 <div className="flex items-center justify-between my-[40px] px-[40px]">
-                    <Link to="/services">
+                    <Link to="/team">
                         <button className="w-[202px] text-[#249D8C] font-semibold text-[26px] h-[66px] rounded-[5px] border-[3px] border-[#249D8C] ">
 
                             Назад
@@ -61,9 +61,9 @@ const AdminTeamMembers = () => {
                     </button>
                 </div>
                 {/*  */}
-                <div className="w-full h-[722px] border-[3px] border-[#249D8C]">
+                <div className="w-full  border-[3px] border-[#249D8C] rounded-[10px]">
                     <div className="flex items-start justify-start gap-[40px]">
-                        <div className="w-[658px] h-[722px] border-[#249D8C]  border">
+                        <div className="w-[658px] h-[722px] border-[#249D8C]  overflow-hidden  border  rounded-[5px]">
                             <img src={`http://127.0.0.1:2024/read/file?Path=${data.Photo}`} alt="dfsa" className=" h-full" />
                         </div>
                         <div className="font-semibold mt-[40px]">

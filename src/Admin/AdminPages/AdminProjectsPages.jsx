@@ -4,7 +4,7 @@ import AdminProjects from "../AdminComponents/AdminProjects/AdminProjects"
 const AdminProjectsPages = () => {
     return (
         <div>
-            <AdminFieldBorder className="">
+            <AdminFieldBorder className="min-h-[1033px]">
                 {
                     <div>
                         <AdminProjects />

@@ -17,6 +17,11 @@ const AdminStatisticsFields = () => {
     const [activeButtonStatistics, setActiveButtonStatistics] = useState(() => {
         return localStorage.getItem("activeButtonStatistics") || "adding";
     });
+    console.log(activeButtonStatistics);
+
+    if (activeButtonStatistics == "statistic") {
+        window.location.reload()
+    }
 
     useEffect(() => {
         localStorage.setItem("activeButtonStatistics", activeButtonStatistics || "adding");
@@ -96,6 +101,9 @@ const AdminStatisticsFields = () => {
 
 
     // };
+    function refreshPage() {
+        window.location.reload(false);
+    }
 
     return (
         <AdminFieldBorder className="flex items-end justify-between flex-col">
@@ -112,7 +120,11 @@ const AdminStatisticsFields = () => {
                         <AdminStatisticsButton
                             className="border-l-0 rounded-l-[0px]"
                             active={activeButtonStatistics === 'statistics'}
-                            onClick={() => setActiveButtonStatistics('statistics')}
+                            onClick={() => {
+                                setActiveButtonStatistics('statistics');
+                                refreshPage();
+                            }}
+                            reload
                         >
                             {"Статистика"}
                         </AdminStatisticsButton>
@@ -127,7 +139,7 @@ const AdminStatisticsFields = () => {
                                             value={value}
                                             type="text"
                                             placeholder="Значение"
-                                            className="border-[3px] h-[71px] p-5 bg-transparent rounded-[10px] w-[308px] border-[#249D8C]"
+                                            className="border-[3px] placeholder:text-[26px] pb-[10px]  h-[71px] p-5 bg-transparent rounded-[10px] w-[308px] border-[#249D8C]"
                                             onChange={(e) => setValue(e.target.value)}
                                         />
                                     </div>
@@ -159,7 +171,10 @@ const AdminStatisticsFields = () => {
                                     </div>
                                 </div>
                             </form>
-
+                            <div className="items-end flex justify-end mr-[40px] relative top-[400px]">
+                                <AdminSubmitButton submitData={requestData} url="http://127.0.0.1:2024/add/statistics" />
+                                {/* {isLoading && <p>Loading...</p>} */}
+                            </div>
                         </div>
                     ) : (
                         <div className="flex items-stat gap-5 flex-col mt-[50px]">
@@ -177,11 +192,8 @@ const AdminStatisticsFields = () => {
                     )}
                 </div>
             </div>
-            <div className="items-end flex justify-end mr-[40px]  ">
-                <AdminSubmitButton submitData={requestData} url="http://127.0.0.1:2024/add/statistics" />
-                {/* {isLoading && <p>Loading...</p>} */}
-            </div>
-        </AdminFieldBorder>
+
+        </AdminFieldBorder >
     );
 };
 

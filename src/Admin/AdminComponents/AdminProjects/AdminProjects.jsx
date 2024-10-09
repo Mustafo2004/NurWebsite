@@ -93,6 +93,9 @@ const AdminProjects = () => {
     //             setIsLoading(false);
     //         });
     // };
+    function refreshPage() {
+        window.location.reload(false);
+    }
     const handleLanguage = (e) => {
         setIsTajikLanguage(e);
     };
@@ -113,7 +116,11 @@ const AdminProjects = () => {
                 <AdminStatisticsButton
                     className="border-l-0 rounded-l-[0px]"
                     active={activeButtonProject === 'projects'}
-                    onClick={() => setActiveButtonProject('projects')}
+                    onClick={() => {
+                        setActiveButtonProject('projects')
+                        refreshPage()
+                    }
+                    }
                 >
                     {t("Проекты")}
                 </AdminStatisticsButton>
@@ -164,7 +171,7 @@ const AdminProjects = () => {
                             </div>
                             <AdminLanguageSelector onLanguageChange={handleLanguage} />
                         </form>
-                        <div className="flex justify-end my-[350px] mr-[40px] ">
+                        <div className="flex justify-end pb-[40px] mr-[40px] relative top-[350px] ">
                             <AdminSubmitButton submitData={requestData} url="http://127.0.0.1:2024/add/project" />
                             {/* {isLoading && <p>Loading...</p>} */}
                         </div>
@@ -188,7 +195,7 @@ const AdminProjects = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     );
 };
 

@@ -21,10 +21,10 @@ const AdminSubmitButton = ({ submitData, url }) => {
 
             if (response.ok) {
                 console.log("if", response);
-                
+
                 const result = await response.text();
                 console.log("result", result);
-                
+
                 setModalState({ message: 'Отправка успешна!', class: styles.success, show: true });
                 console.log("Success:", result);
             } else {

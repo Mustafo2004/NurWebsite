@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import AdminStatisticsButton from "../AdminStatisticsButton/AdminStatisticsButton";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../../Hooks/Fetching";
 import AdminLanguageSelector from "../AdminLanguageSelectoe/AdminLanguageSelectoe";
 import AdminSubmitButton from "../AdminComponents/AdminSubmitButton/AdminSubmitButton";
@@ -8,8 +8,10 @@ import AdminButtonDelete from "../AdminComponents/AdminButtonDelete/AdminButtonD
 import AdminInput from "../AdminComponents/AdminInput/AdminInput";
 import AdminFieldBorder from "../AdminComponents/AdminFieldBorder/AdminFieldBorder";
 import { Link } from "react-router-dom";
+import calendar from "../../assets/Icons/calendar.svg"
 
 const AdminNewsPage = () => {
+    const dateTimeRef = useRef()
     const [projectName, setProjectName] = useState("");
     const [projectNameTj, setProjectNameTj] = useState("");
     const [projectDescription, setProjectDescription] = useState("");
@@ -51,6 +53,9 @@ const AdminNewsPage = () => {
             "Short_Info": projectDescriptionTj
         }
     };
+    function refreshPage() {
+        window.location.reload(false);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -135,7 +140,10 @@ const AdminNewsPage = () => {
                         <AdminStatisticsButton
                             className="border-l-0 rounded-l-[0px]"
                             active={activeButtonNews === 'news'}
-                            onClick={() => setActiveButtonNews('news')}
+                            onClick={() => {
+                                setActiveButtonNews('news')
+                                refreshPage()
+                            }}
                         >
                             {t("Новости")}
                         </AdminStatisticsButton>
@@ -191,18 +199,47 @@ const AdminNewsPage = () => {
                                             <AdminLanguageSelector onLanguageChange={handleLanguage} />
                                         </div>
                                         <div className="px-[20px] mt-[20px] flex gap-5 flex-col items-start">
-                                            <AdminInput
+                                            {/* <AdminInput
                                                 type="date"
                                                 placeholder="Дата"
                                                 className="w-[1024px]"
                                                 required={true}
                                                 value={dataTime}
                                                 onChange={(e) => setDataTime(e.target.value)}
-                                            />
+                                            /> */}
+                                            <div className='flex  justify-startflex justify-between items-center  px-[20px]  w-[1024px] border-[#249D8C] border-[3px] rounded-[10px]  h-[71px]'>
+                                                <input type="text"
+                                                    placeholder='Даты'
 
-                                            <div className="w-[1024px] flex items-center justify-between border-[#249D8C] border-[3px] py-[9px] px-[20px] h-[71px] rounded-[10px]">
+                                                    value={dataTime}
+                                                    className="bg-transparent w-full focus:outline-none"
+                                                />
+
+                                                <input
+                                                    type="date"
+                                                    placeholder='Date'
+                                                    id="date-time"
+                                                    onChange={(e) => setDataTime(e.target.value)}
+                                                    value={dataTime}
+                                                    ref={dateTimeRef}
+                                                    style={{ opacity: "0" }}
+                                                />
+                                                <button
+                                                    style={{ border: "none", background: "white" }}
+                                                >
+                                                    <img
+                                                        // className='w-[60px] h-[30px]'
+                                                        style={{ objectFit: "cover" }}
+                                                        onClick={() => { dateTimeRef.current.showPicker() }}
+                                                        src={calendar}
+                                                        alt="" />
+                                                </button>
+
+                                            </div>
+                                            <div className="w-[1024px] flex  items-center justify-between border-[#249D8C] border-[3px] py-[9px] px-[20px] h-[71px] rounded-[10px]">
                                                 <AdminInput
-                                                    className="focus:outline-none w-[300px] border-none bg-transparent"
+                                                
+                                                    className="focus:outline-none w-[500px] border-none bg-transparent"
                                                     type="text"
                                                     placeholder="Фотография - основная"
                                                     value={photoPath}
